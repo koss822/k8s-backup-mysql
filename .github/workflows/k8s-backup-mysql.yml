@@ -13,11 +13,11 @@ jobs:
       - name: Docker login
         uses: docker/login-action@v2
         with:
-          username: ${{ env.DOCKERHUB_USERNAME }}
+          username: ${{ vars.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Checkout
         uses: actions/checkout@v3
 
       - name: Build docker image
-        run: cd Docker/k8s-backup-mysql && docker build . --file Dockerfile --tag ${{ env.DOCKERHUB_USERNAME }}/k8s-backup-mysql:$(date +%s) --tag ${{ env.DOCKERHUB_USERNAME }}/k8s-backup-mysql:latest && docker push ${{ env.DOCKERHUB_USERNAME }}/k8s-backup-mysql --all-tags
+        run: cd Docker/k8s-backup-mysql && docker build . --file Dockerfile --tag ${{ vars.DOCKERHUB_USERNAME }}/k8s-backup-mysql:$(date +%s) --tag ${{ vars.DOCKERHUB_USERNAME }}/k8s-backup-mysql:latest && docker push ${{ vars.DOCKERHUB_USERNAME }}/k8s-backup-mysql --all-tags
